@@ -1,0 +1,17 @@
+body{
+     background: linear-gradient(to right, #ffceab, #ffffff);
+
+}
+.container-mt-5{
+    width: 50%;
+    margin: 150px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+input[value] {
+    color: blue;
+    background-color: lightgrey;
+}

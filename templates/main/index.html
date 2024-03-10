@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Калькулятор</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+</head>
+<body>
+<div class="container-mt-5">
+    <h1>Калькулятор</h1>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <h3>Розрахунок</h3>
+            <form id="ArithmeticOperationForm" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="number1">Перше число:</label>
+                    <input type="number" class="form-control" id="number1" name="number1" step="0.001" placeholder="{{number1}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="number2">Друге число:</label>
+                    <input type="number" class="form-control" id="number2" name="number2" step="0.001" placeholder="{{number2}}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="operation">Операція:</label>
+                    <select name="operation" class="form-control" >
+                        <option value="+" {% if operation == '+' %} selected {% endif %}>Додавання</option>
+                        <option value="-" {% if operation == '-' %} selected {% endif %}>Віднімання</option>
+                        <option value="*" {% if operation == '*' %} selected {% endif %}>Множення</option>
+                        <option value="/" {% if operation == '/' %} selected {% endif %}>Ділення</option>
+                    </select>
+                </div>
+        
+                <button type="submit" name="arithmetic_operation_submit" class="btn btn-primary">Розрахувати</button>
+            </form>
+            <p>Результат операції: {{ arithmetic_operation_result }}</p>
+            {% if arithmetic_operation_error %}
+                <p style="color: red;">{{ arithmetic_operation_error }}</p>
+            {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <h3>Переведення кілометрів в милі</h3>
+            <form id="conversionForm" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="kilometers">Кілометри:</label>
+                    <input name="kilometers" type="number" class="form-control" id="kilometers" placeholder="{{kilometers}}" step="0.001" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Розрахувати</button>
+            </form>
+            <p>Результат конвертації: {{ conversion_result }} миль</p>
+            {% if conversion_error %}
+                <p style="color: red;">{{ conversion_error }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
